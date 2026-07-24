@@ -8,13 +8,14 @@ import pages.OrderPage;
 
 public class OrderTest extends BaseTest {
 
+    private static final String URL = "https://qa-scooter.education-services.ru";
     @ParameterizedTest
     @CsvSource({
             "top, Иван, Иванов, 'г.Москва, ул.Ленина, д.5', 89991112233, позвонить",
             "under, Анна, Петрова, 'г.Москва, ул.Мира, д.12, кв.4', 88005553535, ''"
     })
     public void testScooterOrderFlow(String buttonType, String firstName, String lastName, String address, String phone, String comment) {
-        driver.get("https://qa-scooter.education-services.ru/");
+        driver.get(URL);
         MainPage mainPage = new MainPage(driver);
         OrderPage orderPage = new OrderPage(driver);
         mainPage.acceptCookies(); //Я долго мучился, пока не зашел в режим инкогнито
