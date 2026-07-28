@@ -3,7 +3,6 @@ package tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.openqa.selenium.By;
 import pages.MainPage;
 
 public class MainPageQuestionsTest extends BaseTest {
@@ -25,10 +24,10 @@ public class MainPageQuestionsTest extends BaseTest {
         driver.get(URL);
         MainPage mainPage = new MainPage(driver);
 
-        By questionLocator = By.xpath("(//div[@data-accordion-component='AccordionItemHeading'])[" + numberPage + "]");
-        By answerLocator = By.xpath("(//div[@data-accordion-component='AccordionItemPanel'])[" + numberPage + "]");
-        String actualAnswerText = mainPage.getAnswerTextAfterClick(questionLocator, answerLocator);
-
+        String actualAnswerText = mainPage.getAnswerTextAfterClick(
+                mainPage.getQuestionLocatorByNumber(numberPage),
+                mainPage.getAnswerLocatorByNumber(numberPage)
+        );
         Assertions.assertEquals(expectedAnswerText, actualAnswerText, "Текст ответа не совпал для вкладки №" + numberPage);
     }
 
